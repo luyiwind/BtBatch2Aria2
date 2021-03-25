@@ -35,6 +35,7 @@ def handle(s, btFile, secret):
         uret=s.aria2.unpause('token:'+secret, gid)
         print('unpause: ',uret)
     print('over: ',str(btFile))
+    os.remove(btFile)
 
 
 if __name__ == "__main__":
