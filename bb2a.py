@@ -3,9 +3,9 @@ import xmlrpc
 import os
 import argparse
 
-def handle(s, btFile):
+def handle(s, btFile, secret):
     print('handle bittorrent file: ', str(btFile))
-    ret=s.aria2.addTorrent(xmlrpc.client.Binary(open(btFile, mode='rb').read()),[],{'pause':'true'})
+    ret=s.aria2.addTorrent('token:'+secret, xmlrpc.client.Binary(open(btFile, mode='rb').read()),[],{'pause':'true'})
     print("add bt: ",str(ret))
     waiting = s.aria2.tellWaiting(0, 1000,
                               ["gid", "totalLength", "completedLength", "uploadSpeed", "downloadSpeed", "connections",
@@ -50,5 +50,5 @@ if __name__ == "__main__":
     for i in range(0, len(flist)):
         btFile = os.path.join(args.dir, flist[i])
         if os.path.isfile(btFile):
-            handle(s,btFile)
+            handle(s,btFile,args.secret)
     print("Done")
