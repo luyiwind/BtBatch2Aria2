@@ -37,7 +37,6 @@ def handle(s, btFile, secret):
     print('over: ',str(btFile))
 
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.description = 'bt批量导入aria2，并选择文件大小最大的文件进行下载'
