@@ -43,6 +43,7 @@ if __name__ == "__main__":
     parser.description = 'bt批量导入aria2，并选择文件大小最大的文件进行下载'
     parser.add_argument("server", help="like: http://192.168.3.99:6800/", type=str)
     parser.add_argument("dir", help="the dir of your bittorrents", type=str)
+    parser.add_argument("secret", help="secrets", type=str)
     args = parser.parse_args()
     s = xmlrpc.client.ServerProxy(args.server+"rpc")
     flist=os.listdir(args.dir)
