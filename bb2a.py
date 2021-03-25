@@ -7,7 +7,7 @@ def handle(s, btFile, secret):
     print('handle bittorrent file: ', str(btFile))
     ret=s.aria2.addTorrent('token:'+secret, xmlrpc.client.Binary(open(btFile, mode='rb').read()),[],{'pause':'true'})
     print("add bt: ",str(ret))
-    waiting = s.aria2.tellWaiting(0, 1000,
+    waiting = s.aria2.tellWaiting('token:'+secret, 0, 1000,
                               ["gid", "totalLength", "completedLength", "uploadSpeed", "downloadSpeed", "connections",
                                "numSeeders", "seeder", "status", "errorCode", "verifiedLength",
                                "verifyIntegrityPending", "files", "bittorrent", "infoHash"])
@@ -28,11 +28,11 @@ def handle(s, btFile, secret):
                 maxFIndex=f['index']
         print('max file: ',str(maxLen),maxFIndex,str(maxFPath))
         # max-selection strategy end
-        cret=s.aria2.changeOption(gid,{'select-file':maxFIndex})# select multiple files example: 'select-file':'5,6,7,8'
+        cret=s.aria2.changeOption('token:'+secret, gid,{'select-file':maxFIndex})# select multiple files example: 'select-file':'5,6,7,8'
         print('select file: ',cret)
-        tret=s.aria2.tellStatus(gid)
+        tret=s.aria2.tellStatus('token:'+secret, gid)
         print('after selection: ', tret['files'][int(maxFIndex)-1])
-        uret=s.aria2.unpause(gid)
+        uret=s.aria2.unpause('token:'+secret, gid)
         print('unpause: ',uret)
     print('over: ',str(btFile))
 
