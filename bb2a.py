@@ -21,7 +21,7 @@ def handle(s, btFile, secret):
         maxFPath=''
         maxFIndex='0'
         for f in w['files']:
-            #print(f['length'],f['path'])
+            print(f['length'],f['path'])
             if int(f['length'])>maxLen:
                 maxLen=int(f['length'])
                 maxFPath=f['path']
