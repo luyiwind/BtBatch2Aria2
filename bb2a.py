@@ -39,7 +39,7 @@ def handle(s, btFile, secret):
 
 def handleMag(s, mgFile, secret):
     print('handle mag file: ', str(mgFile))
-    ret=s.aria2.addMetalink('token:'+secret, xmlrpc.client.Binary(open(mgFile, mode='rb').read()),[],{})
+    ret=s.aria2.addUri('token:'+secret, xmlrpc.client.Binary(open(mgFile, mode='rb').read()))
     print("add mag: ",str(ret))
     print("remove mag file: ",str(mgFile))
     os.remove(mgFile)
