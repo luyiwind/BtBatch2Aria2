@@ -39,7 +39,7 @@ def handle(s, btFile, secret):
 
 def handleMag(s, mgFile, secret):
     print('handle mag file: ', str(mgFile))
-    ret=s.aria2.addUri('token:'+secret, xmlrpc.client.Binary(open(mgFile, mode='rb').read()))
+    ret=s.aria2.addUri('token:'+secret, [xmlrpc.client.Binary(open(mgFile, mode='rb').read())])
     print("add mag: ",str(ret))
     print("remove mag file: ",str(mgFile))
     os.remove(mgFile)
@@ -54,6 +54,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     s = xmlrpc.client.ServerProxy(args.server+"rpc")
     flist=os.listdir(args.dir)
+    count = 0
     for i in range(0, len(flist)):
         btFile = os.path.join(args.dir, flist[i])
         if os.path.isfile(btFile):
@@ -62,6 +63,9 @@ if __name__ == "__main__":
     for root, dirs, files in os.walk(args.mgdir):
         for file in files:
             if file.endswith(".txt"):
+                count += 1
+                if count > 2:
+                    continue
                 mgFile = os.path.join(root, file)
                 handleMag(s,mgFile,args.secret)
     
