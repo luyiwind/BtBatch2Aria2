@@ -37,12 +37,19 @@ def handle(s, btFile, secret):
     print('over: ',str(btFile))
     os.remove(btFile)
 
+def handleMag(s, mgFile, secret):
+    print('handle mag file: ', str(mgFile))
+    ret=s.aria2.addMetalink('token:'+secret, xmlrpc.client.Binary(open(mgFile, mode='rb').read()),[],{})
+    print("add mag: ",str(ret))
+    print("remove mag file: ",str(mgFile))
+    os.remove(mgFile)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.description = 'bt批量导入aria2，并选择文件大小最大的文件进行下载'
     parser.add_argument("server", help="like: http://192.168.3.99:6800/", type=str)
     parser.add_argument("dir", help="the dir of your bittorrents", type=str)
+    parser.add_argument("mgdir", help="the dir of your magnets", type=str)
     parser.add_argument("secret", help="secrets", type=str)
     args = parser.parse_args()
     s = xmlrpc.client.ServerProxy(args.server+"rpc")
@@ -51,4 +58,11 @@ if __name__ == "__main__":
         btFile = os.path.join(args.dir, flist[i])
         if os.path.isfile(btFile):
             handle(s,btFile,args.secret)
+            
+    for root, dirs, files in os.walk(args.mgdir):
+        for file in files:
+            if file.endswith(".txt"):
+                mgFile = os.path.join(root, file)
+                handleMag(s,mgFile,args.secret)
+    
     print("Done")
