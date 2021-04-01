@@ -43,7 +43,7 @@ def handleMag(s, mgFile, secret):
         ret=s.aria2.addUri('token:'+secret, [xmlrpc.client.Binary(open(mgFile, mode='rb').read())])
         print("add mag: ",str(ret))
         print("remove mag file: ",str(mgFile))
-        os.remove(mgFile)
+    os.remove(mgFile)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
