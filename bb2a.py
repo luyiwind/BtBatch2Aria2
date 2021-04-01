@@ -48,6 +48,7 @@ def handleMag(s, mgFile, secret):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.description = 'bt批量导入aria2，并选择文件大小最大的文件进行下载'
+    parser.add_argument("num", help="like: http://192.168.3.99:6800/", type=int)
     parser.add_argument("server", help="like: http://192.168.3.99:6800/", type=str)
     parser.add_argument("dir", help="the dir of your bittorrents", type=str)
     parser.add_argument("mgdir", help="the dir of your magnets", type=str)
@@ -65,7 +66,7 @@ if __name__ == "__main__":
         for file in files:
             if file.endswith(".txt"):
                 count += 1
-                if count > 2:
+                if count > args.num:
                     continue
                 mgFile = os.path.join(root, file)
                 handleMag(s,mgFile,args.secret)
