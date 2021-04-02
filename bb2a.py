@@ -68,6 +68,8 @@ if __name__ == "__main__":
         for file in files:
             if name == "any":
                 name = file
+            print(name.lower().replace('-',''))
+            print(file.lower().replace('-',''))
             if name.lower().replace('-','') in file.lower().replace('-',''):
                 if file.endswith(".txt"):
                     count += 1
