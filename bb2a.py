@@ -66,16 +66,15 @@ if __name__ == "__main__":
             
     for root, dirs, files in os.walk(args.mgdir):
         for file in files:
-            if name == "any":
-                name = file
             print(name.lower().replace('-',''))
             print(file.lower().replace('-',''))
-            if name.lower().replace('-','') in file.lower().replace('-',''):
-                if file.endswith(".txt"):
-                    count += 1
-                    if count > args.num:
-                        continue
-                    mgFile = os.path.join(root, file)
-                    handleMag(s,mgFile,args.secret)
+            if name != "any" && file.lower().replace('-','').find(name.lower().replace('-','')) == -1:
+                continue
+            if file.endswith(".txt"):
+                count += 1
+                if count > args.num:
+                    continue
+                mgFile = os.path.join(root, file)
+                handleMag(s,mgFile,args.secret)
                     
     print("Done")
