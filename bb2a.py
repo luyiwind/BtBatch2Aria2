@@ -58,6 +58,7 @@ if __name__ == "__main__":
     s = xmlrpc.client.ServerProxy(args.server+"rpc")
     flist=os.listdir(args.dir)
     count = 0
+    name = args.name
     for i in range(0, len(flist)):
         btFile = os.path.join(args.dir, flist[i])
         if os.path.isfile(btFile):
@@ -65,7 +66,9 @@ if __name__ == "__main__":
             
     for root, dirs, files in os.walk(args.mgdir):
         for file in files:
-            if args.name.lower().replace('-','') in file.lower().replace('-',''):
+            if name == "any":
+                name = file
+            if name.lower().replace('-','') in file.lower().replace('-',''):
                 if file.endswith(".txt"):
                     count += 1
                     if count > args.num:
