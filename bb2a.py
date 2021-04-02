@@ -53,6 +53,7 @@ if __name__ == "__main__":
     parser.add_argument("dir", help="the dir of your bittorrents", type=str)
     parser.add_argument("mgdir", help="the dir of your magnets", type=str)
     parser.add_argument("secret", help="secrets", type=str)
+    parser.add_argument("name", help="mag name", type=str)
     args = parser.parse_args()
     s = xmlrpc.client.ServerProxy(args.server+"rpc")
     flist=os.listdir(args.dir)
@@ -64,11 +65,12 @@ if __name__ == "__main__":
             
     for root, dirs, files in os.walk(args.mgdir):
         for file in files:
-            if file.endswith(".txt"):
-                count += 1
-                if count > args.num:
-                    continue
-                mgFile = os.path.join(root, file)
-                handleMag(s,mgFile,args.secret)
+            if args.name.lower().replace('-','') in file.lower().replace('-',''):
+                if file.endswith(".txt"):
+                    count += 1
+                    if count > args.num:
+                        continue
+                    mgFile = os.path.join(root, file)
+                    handleMag(s,mgFile,args.secret)
     
     print("Done")
