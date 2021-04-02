@@ -72,5 +72,4 @@ if __name__ == "__main__":
                         continue
                     mgFile = os.path.join(root, file)
                     handleMag(s,mgFile,args.secret)
-    
     print("Done")
