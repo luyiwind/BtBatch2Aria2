@@ -66,9 +66,7 @@ if __name__ == "__main__":
             
     for root, dirs, files in os.walk(args.mgdir):
         for file in files:
-            print(name.lower().replace('-',''))
-            print(file.lower().replace('-',''))
-            if name != "any" and file.lower().replace('-','').find(name.lower().replace('-','')) == -1:
+            if name != "any" and root.lower().replace('-','').find(name.lower().replace('-','')) == -1:
                 continue
             if file.endswith(".txt"):
                 count += 1
