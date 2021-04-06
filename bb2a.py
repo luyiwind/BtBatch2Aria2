@@ -75,4 +75,4 @@ if __name__ == "__main__":
                 mgFile = os.path.join(root, file)
                 handleMag(s,mgFile,args.secret)
                     
-    print("Done")
+    print("Add magnets to air2 Done")
