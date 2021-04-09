@@ -60,9 +60,10 @@ if __name__ == "__main__":
     count = 0
     name = args.name
     for i in range(0, len(flist)):
-        btFile = os.path.join(args.dir, flist[i])
-        if os.path.isfile(btFile):
-            handle(s,btFile,args.secret)
+        if flist[i].endswith(".torrent"):
+            btFile = os.path.join(args.dir, flist[i])
+            if os.path.isfile(btFile):
+                handle(s,btFile,args.secret)
             
     for root, dirs, files in os.walk(args.mgdir):
         for file in files:
