@@ -74,7 +74,7 @@ if __name__ == "__main__":
                 if count > args.num:
                     continue
                 mgFile = os.path.join(root, file)
-                print("path:"root)
+                print("path:",str(root))
                 handleMag(s,mgFile,args.secret)
                     
     print("Add magnets to air2 Done")
