@@ -57,24 +57,25 @@ if __name__ == "__main__":
     args = parser.parse_args()
     s = xmlrpc.client.ServerProxy(args.server+"rpc")
     flist=os.listdir(args.dir)
-    count = 0
     name = args.name
+    
     for i in range(0, len(flist)):
         if flist[i].endswith(".torrent"):
             btFile = os.path.join(args.dir, flist[i])
             if os.path.isfile(btFile):
                 handle(s,btFile,args.secret)
             
+    temp = []
     for root, dirs, files in os.walk(args.mgdir):
         for file in files:
             if name != "any" and root.lower().replace('-','').find(name.lower().replace('-','')) == -1:
                 continue
             if file.endswith(".txt"):
-                count += 1
-                if count > args.num:
-                    continue
-                mgFile = os.path.join(root, file)
-                print("path:",str(root))
-                handleMag(s,mgFile,args.secret)
+                temp.append(os.path.join(root, file))
+                
+    if len(temp) >= args.num:
+        for myFile in random.sample(temp, args.num):
+            print("path:",str(mgFile))
+            handleMag(s,mgFile,args.secret)
                     
     print("Add magnets to air2 Done")
