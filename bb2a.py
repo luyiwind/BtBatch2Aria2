@@ -2,6 +2,7 @@ import xmlrpc.client
 import xmlrpc
 import os
 import argparse
+import random
 
 def handle(s, btFile, secret):
     print('handle bittorrent file: ', str(btFile))
@@ -74,7 +75,7 @@ if __name__ == "__main__":
                 temp.append(os.path.join(root, file))
                 
     if len(temp) >= args.num:
-        for myFile in random.sample(temp, args.num):
+        for mgFile in random.sample(temp, args.num):
             print("path:",str(mgFile))
             handleMag(s,mgFile,args.secret)
                     
