@@ -74,9 +74,8 @@ if __name__ == "__main__":
             if file.endswith(".txt"):
                 temp.append(os.path.join(root, file))
                 
-    if len(temp) >= args.num:
+    if len(temp) > 0:
         for mgFile in random.sample(temp, args.num):
             print("path:",str(mgFile))
             handleMag(s,mgFile,args.secret)
-                    
-    print("Add magnets to air2 Done")
+        print("Add magnets to air2 Done")
