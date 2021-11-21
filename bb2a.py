@@ -79,3 +79,5 @@ if __name__ == "__main__":
             print("path:",str(mgFile))
             handleMag(s,mgFile,args.secret)
         print("Add magnets to air2 Done")
+    else:
+        print("No magnets to air2 !!!")
